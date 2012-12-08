@@ -9,8 +9,6 @@ var express = require('express')
   , http = require('http')
   , path = require('path');
 
-var app = express();
-
 var OAuth= require('oauth').OAuth;
 
 var oa = new OAuth(
@@ -23,6 +21,8 @@ var oa = new OAuth(
 	"HMAC-SHA1"
 );
 
+var app = express();
+
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
@@ -31,6 +31,8 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
+  app.use(express.cookieParser('your secret here'));
+  app.use(express.session());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
@@ -42,7 +44,6 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/auth/twitter', function(req, res){
-	res.send("'Sup!'");
 	oa.getOAuthRequestToken(function(error, oauth_token, oauth_token_secret, results){
 		if (error) {
 			console.log(error);
@@ -55,7 +56,7 @@ app.get('/auth/twitter', function(req, res){
 			req.session.oauth.token_secret = oauth_token_secret;
 			console.log('oauth.token_secret: ' + req.session.oauth.token_secret);
 			res.redirect('https://twitter.com/oauth/authenticate?oauth_token='+oauth_token)
-	   }
+	}
 	});
 });
 app.get('/auth/twitter/callback', function(req, res, next){
@@ -70,7 +71,7 @@ app.get('/auth/twitter/callback', function(req, res, next){
 				res.send("yeah something broke.");
 			} else {
 				req.session.oauth.access_token = oauth_access_token;
-				req.session.oauth.access_token_secret = oauth_access_token_secret;
+				req.session.oauth,access_token_secret = oauth_access_token_secret;
 				console.log(results);
 				res.send("worked. nice one.");
 			}
