@@ -1,13 +1,17 @@
 {
   "name": "twitter-oauth-test",
-  "version": "0.0.1",
+  "version": "0.0.1-1",
   "private": true,
   "dependencies": {
     "express": "3.0.4",
-    "jade": "*"
+    "jade": "*",
+    "oauth": "0.9.x"
   },
   "subdomain": "elzair.twitter-oauth-test",
   "engines": {
     "node": "0.8.x"
+  },
+  "scripts": {
+    "start": "app.js"
   }
 }

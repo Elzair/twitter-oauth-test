@@ -19,7 +19,7 @@ var oa = new OAuth(
 	"0fuAfly9ohR6zcJiT7dMg",
 	"80l3r0p2ZU9jDSMn2gPDcDSp8Hpg1hsMghC4iKQyYg",
 	"1.0",
-	"http://yourdomain/auth/twitter/callback",
+	"http://elzair.twitter-oauth-test.jit.su/auth/twitter/callback",
 	"HMAC-SHA1"
 );
 
