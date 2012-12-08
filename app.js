@@ -42,6 +42,7 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/auth/twitter', function(req, res){
+	res.send("'Sup!'");
 	oa.getOAuthRequestToken(function(error, oauth_token, oauth_token_secret, results){
 		if (error) {
 			console.log(error);
@@ -54,7 +55,7 @@ app.get('/auth/twitter', function(req, res){
 			req.session.oauth.token_secret = oauth_token_secret;
 			console.log('oauth.token_secret: ' + req.session.oauth.token_secret);
 			res.redirect('https://twitter.com/oauth/authenticate?oauth_token='+oauth_token)
-	}
+	   }
 	});
 });
 app.get('/auth/twitter/callback', function(req, res, next){
@@ -69,7 +70,7 @@ app.get('/auth/twitter/callback', function(req, res, next){
 				res.send("yeah something broke.");
 			} else {
 				req.session.oauth.access_token = oauth_access_token;
-				req.session.oauth,access_token_secret = oauth_access_token_secret;
+				req.session.oauth.access_token_secret = oauth_access_token_secret;
 				console.log(results);
 				res.send("worked. nice one.");
 			}
