@@ -17,7 +17,7 @@ var oa = new OAuth(
     "0fuAfly9ohR6zcJiT7dMg",
     "80l3r0p2ZU9jDSMn2gPDcDSp8Hpg1hsMghC4iKQyYg",
     "1.0",
-    "http://elzair.oauth-test.jit.su/auth/twitter/callback",
+    "http://ec2-50-19-161-7.compute-1.amazonaws.com/auth/twitter/callback",
     "HMAC-SHA1"
 );
 
@@ -26,7 +26,7 @@ express.request.oa = express.response.oa = oa;
 var app = express();
 
 app.configure(function(){
-  app.set('port', process.env.PORT || 3000);
+  app.set('port', process.env.PORT || 80);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.favicon());
