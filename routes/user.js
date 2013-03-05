@@ -8,7 +8,7 @@ exports.list = function(req, res){
 };
 
 exports.authenticate = function(req, res){
-  oa.getOAuthRequestToken(function(error, oauth_token, oauth_token_secret, results){
+  req.oa.getOAuthRequestToken(function(error, oauth_token, oauth_token_secret, results){
     if (error) {
       console.log(error);
       res.send("yeah no. didn't work.")
@@ -29,7 +29,7 @@ exports.callback = function(req, res, next){
     req.session.oauth.verifier = req.query.oauth_verifier;
     var oauth = req.session.oauth;
 
-    oa.getOAuthAccessToken(oauth.token,oauth.token_secret,oauth.verifier, 
+    req.oa.getOAuthAccessToken(oauth.token,oauth.token_secret,oauth.verifier, 
       function(error, oauth_access_token, oauth_access_token_secret, results){
         if (error){
           console.log(error);
